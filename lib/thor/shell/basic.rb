@@ -145,7 +145,7 @@ class Thor
         maximas = []
 
         start.upto(colcount - 1) do |index|
-          maxima = array.map {|row| row[index] ? row[index].to_s.size : 0 }.max
+          maxima = array.map {|row| row[index] ? row[index].to_s.gsub(/\e\[[\d,]+m/, "").size : 0 }.max
           maximas << maxima
           if index == colcount - 1
             # Don't output 2 trailing spaces when printing the last column

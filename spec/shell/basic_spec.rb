@@ -238,6 +238,19 @@ Name  Number         Color
 Erik  1234567890123  green
 TABLE
     end
+
+    it "prints a table with colors" do
+      # "\e[1mBE BOLD\e[0m"
+      table = [
+        ["Name", "Number", "Color"],
+        ["Erik", "\e[1mBE BOLD\e[0m", "green"]
+      ]
+      content = capture(:stdout) { shell.print_table(table) }
+      expect(content).to eq(<<-TABLE)
+Name  Number   Color
+Erik  \e[1mBE BOLD\e[0m  green
+      TABLE
+    end
   end
 
   describe "#file_collision" do
